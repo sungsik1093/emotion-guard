@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  감지할 이벤트
+  - typeViewTextChanged : 입력창 글 변경
+  - typeViewFocused     : 입력창 포커스
+  - typeViewClicked     : 전송 버튼 클릭
+  - typeWindowStateChanged / typeWindowContentChanged : 화면 전환, 새 말풍선
+
+  packageNames로 앱을 제한하지 않는 이유: 메신저를 벗어난 순간(홈 화면 등)을 알아야
+  캐릭터를 숨길 수 있기 때문이다. 대신 코드에서 지원 메신저가 아닌 앱의 이벤트는
+  내용을 읽지 않고 바로 버린다 (AccessibilityInputSource.onEvent).
+-->
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accessibilityEventTypes="typeViewTextChanged|typeViewFocused|typeViewClicked|typeWindowStateChanged|typeWindowContentChanged"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:accessibilityFlags="flagReportViewIds|flagRetrieveInteractiveWindows"
+    android:canRetrieveWindowContent="true"
+    android:description="@string/guard_service_description"
+    android:isAccessibilityTool="false"
+    android:notificationTimeout="100"
+    android:summary="@string/guard_service_summary" />

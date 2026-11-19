@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="guard_service_label">감정 가드</string>
+    <string name="guard_tile_label">감정 가드</string>
+    <string name="guard_service_summary">메시지를 보내기 전에 감정 온도를 알려줍니다.</string>
+    <string name="guard_service_description">감정 가드는 카카오톡 등 지원하는 메신저에서 입력 중인 메시지와 화면의 최근 대화를 읽어, 상대방에게 상처가 될 수 있는 표현인지 분석합니다.\n\n• 읽는 앱: 카카오톡, Google 메시지, 삼성 메시지, 인스타그램, 텔레그램\n• 분석을 위해 문장이 감정 가드 서버를 거쳐 Anthropic Claude API로 전송됩니다. 전화번호·이메일·계좌번호 등은 가린 뒤 보냅니다.\n• 짧고 무난한 문장은 기기 안에서만 판단하고 보내지 않습니다.\n• 비밀번호 입력란은 읽지 않습니다.\n• 원문은 기본적으로 저장하지 않습니다.</string>
+</resources>

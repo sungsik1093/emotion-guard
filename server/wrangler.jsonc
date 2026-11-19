@@ -1,0 +1,29 @@
+{
+  // 감정 가드 API 프록시 (Cloudflare Workers 무료 플랜에서 동작)
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "emotionguard-proxy",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // 사용자별 할당량 카운터 (SQLite 기반 Durable Object: 무료 플랜 사용 가능)
+  "durable_objects": {
+    "bindings": [{ "name": "QUOTA", "class_name": "QuotaCounter" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["QuotaCounter"] }],
+
+  // 비밀이 아닌 설정값. 비밀값(ANTHROPIC_API_KEY, DEV_KEY)은 `wrangler secret put`으로 넣는다.
+  "vars": {
+    "MODEL": "claude-opus-5-5",
+    "AUTH_MODE": "firebase",
+    "FIREBASE_PROJECT_ID": "",
+    "FIREBASE_PROJECT_NUMBER": "",
+    "APP_CHECK_REQUIRED": "true",
+    "FREE_DAILY_LIMIT": "100",
+    "PREMIUM_DAILY_LIMIT": "2000",
+    "PER_MINUTE_LIMIT": "20",
+    "MOCK_ANALYSIS": "false"
+  },
+
+  "observability": { "enabled": true }
+}

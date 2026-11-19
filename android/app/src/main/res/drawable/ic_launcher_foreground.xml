@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 웃는 동그란 얼굴 (기본 캐릭터) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFF4D6"
+        android:pathData="M54,30a24,24 0,1 1,0 48a24,24 0,1 1,0 -48z" />
+    <path
+        android:fillColor="#FF2B2B33"
+        android:pathData="M45,48m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0" />
+    <path
+        android:fillColor="#FF2B2B33"
+        android:pathData="M63,48m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FF2B2B33"
+        android:strokeWidth="3.5"
+        android:strokeLineCap="round"
+        android:pathData="M44,60Q54,70 64,60" />
+</vector>

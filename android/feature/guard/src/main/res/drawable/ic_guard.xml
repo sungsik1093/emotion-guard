@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 방패 안의 하트: 알림·타일용 단색 아이콘 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M12,2L4,5v6c0,5.25 3.4,10.15 8,11.5c4.6,-1.35 8,-6.25 8,-11.5V5L12,2zM12,16.2l-0.73,-0.66C8.68,13.2 7,11.68 7,9.8C7,8.28 8.19,7.1 9.7,7.1c0.86,0 1.68,0.4 2.3,1.03c0.62,-0.63 1.44,-1.03 2.3,-1.03c1.51,0 2.7,1.18 2.7,2.7c0,1.88 -1.68,3.4 -4.27,5.74L12,16.2z" />
+</vector>

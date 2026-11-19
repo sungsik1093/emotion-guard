@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 화면은 Compose 테마(EmotionGuardTheme)가 그린다. 이건 시작 직전 창 배경용. -->
+    <style name="Theme.EmotionGuard" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/window_background</item>
+    </style>
+    <color name="window_background">#FFFBFAFF</color>
+    <color name="ic_launcher_background">#FF5B5BD6</color>
+</resources>

@@ -1,0 +1,5 @@
+.idea/
+graphify-out/
+.claude/settings.local.json
+*.jks
+*.keystore
