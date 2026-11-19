@@ -22,15 +22,73 @@
 
 ## 구조
 
+### 분석 흐름
+
+메신저 입력이 멈추면 기기 안에서 먼저 거르고, 꼭 필요한 문장만 개인정보를 가린 뒤 서버로 보냅니다. Claude API 키는 서버에만 있습니다.
+
+```mermaid
+flowchart LR
+    subgraph APP["Android 앱"]
+        direction TB
+        A["접근성 서비스<br/>감지 계층 (InputSource)"] -->|"디바운스 1.2초"| B{"PreFilter<br/>기기 안 1차 필터"}
+        B -->|"무난한 문장"| S["바로 '안전' 표시<br/>서버 호출 없음"]
+        B -->|"애매 · 위험"| C["PiiMasker<br/>개인정보 가리기 (1차)"]
+        C --> D["AnalysisRepository<br/>메모리 캐시 · 이전 요청 취소"]
+        R["MoodStateMachine"] --> O["캐릭터 오버레이<br/>(Compose)"]
+        A -->|"전송 판단"| DB[("Room<br/>감정 기록")]
+    end
+
+    subgraph WORKER["Cloudflare Worker"]
+        direction TB
+        W1["인증<br/>Firebase ID 토큰 + App Check"] --> W2["입력 검증 (zod)<br/>개인정보 가리기 (2차)"]
+        W2 --> W3["사용자별 할당량<br/>(Durable Object)"]
+    end
+
+    CL["Claude API<br/>구조화된 출력"]
+
+    D -->|"HTTPS"| W1
+    W3 --> CL
+    CL -->|"score · category · reason · alternatives"| R
 ```
-[Android 앱]                              [Cloudflare Worker]            [Claude API]
- 접근성 서비스 ─ 감지 계층(InputSource)      인증(Firebase/dev)
-   │  디바운스 1.2초                          입력 검증 · 개인정보 가리기
-   ▼                                          사용자별 할당량(Durable Object)
- 1차 필터 → 개인정보 가리기 → 캐시 ──HTTPS──▶ Claude 호출(구조화된 출력) ──▶ claude-opus-5-5
-   ▼                                   ◀── { score, category, reason, alternative, quota }
- 캐릭터 상태 머신 → 오버레이(Compose)
- 전송 판단 → Room 기록
+
+### 모듈 구조
+
+의존 방향은 `app → feature → core`이고, feature끼리는 서로 모릅니다. (실제 `build.gradle.kts` 기준)
+
+```mermaid
+flowchart TB
+    app["app<br/>내비게이션 · Hilt 진입점 · 주간 리포트"]
+
+    subgraph feature["feature"]
+        guard["guard<br/>접근성 서비스 · 오버레이 · 타일"]
+        home["home"]
+        history["history"]
+        character["character"]
+        settings["settings"]
+        onboarding["onboarding"]
+    end
+
+    subgraph core["core"]
+        analysis["analysis<br/>PreFilter · PiiMasker"]
+        network["network<br/>프록시 API"]
+        database["database<br/>Room"]
+        datastore["datastore<br/>설정 · 스킨 · 성장"]
+        designsystem["designsystem<br/>테마 · 캐릭터"]
+        common["common"]
+        model["model<br/>순수 Kotlin"]
+    end
+
+    app --> feature
+    guard --> analysis & database & datastore
+    home --> analysis & database & datastore
+    history --> database & datastore
+    settings --> database & datastore
+    character --> datastore
+    onboarding --> datastore
+    analysis --> network
+    network --> datastore
+    analysis & network & database & datastore --> common
+    common & designsystem --> model
 ```
 
 ## 빠르게 실행해 보기 (비용 0원)
