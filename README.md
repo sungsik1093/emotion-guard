@@ -1,5 +1,7 @@
 # 감정 가드 (EmotionGuard) v2
 
+[![CI](https://github.com/sungsik1093/emotion-guard/actions/workflows/ci.yml/badge.svg)](https://github.com/sungsik1093/emotion-guard/actions/workflows/ci.yml)
+
 메신저에 글을 쓰는 동안 화면 구석의 작은 캐릭터가 문장의 감정 온도에 따라 표정과 색을 바꾸고, 상처가 될 수 있는 말이면 **보내기 전에** 더 나은 표현을 제안하는 안드로이드 앱입니다.
 
 | 폴더 | 내용 |
